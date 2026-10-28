@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+/socialMediaDataCollectionProject/.json
+/socialMediaDataCollectionProject/tweets.jsonl
+/socialMediaDataCollectionProject/tweets_raw.jsonl
