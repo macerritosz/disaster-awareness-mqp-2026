@@ -219,6 +219,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-/socialMediaDataCollectionProject/.json
-/socialMediaDataCollectionProject/tweets.jsonl
-/socialMediaDataCollectionProject/tweets_raw.jsonl
+/disaster_social_media_collector/.json
+/disaster_social_media_collector/tweets.jsonl
+/disaster_social_media_collector/tweets_raw.jsonl

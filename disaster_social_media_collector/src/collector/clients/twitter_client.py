@@ -16,24 +16,37 @@ from datetime import datetime, timezone, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv("disaster_social_media_collector/.env")
 # === Config ===
 API_URL = "https://api.twitterapi.io/twitter/tweet/advanced_search"
 API_KEY = os.environ.get("API_KEY_X")
-KEYWORD = "(#Harvey OR #Harvey2017 OR #HarveyStorm OR #HoustonFlood)"
-QUERY_FILTERS = "lang:en -filter:replies -filter:verified"  # Skip replies, keep originals + quotes
+
+GENERAL_QUERY = "( \"Houston\" OR \"Texas\" OR \"TX\") AND (\"evacuating\" OR evacuate OR \"no power\" OR \"FEMA\") AND (\"Harvey\" OR)"
+DECISION_QUERY = '("Hurricane Harvey" OR #Harvey) (warning OR forecast OR worried OR "did not expect" OR \"didn\'t expect\" OR decided OR \"changed my mind\" OR waited)'
+EVACUATION_QUERY = '("Hurricane Harvey" OR #Harvey) (evacuate OR evacuated OR evacuating OR "shelter in place" OR stayed OR leaving OR stranded)'
+RECOVERY_QUERY_v1 = '("Hurricane Harvey" OR #Harvey) ("return home" OR cleanup OR rebuilding OR insurance OR shelter OR supplies OR recovery)'
+RECOVERY_QUERY_v2  = '("Houston" OR "Texas" OR "Harris County") ("Harvey" OR #Harvey) (decided OR waited OR returned OR rebuilding OR cleanup OR insurance OR "changed my mind" OR "stay home" OR "leave now")'
+
+LOCATION_ROADS_QUERY = (
+    '(#Harvey OR #HurricaneHarvey OR "Hurricane Harvey" OR #HoustonFlooding OR "Houston flooding" OR "Harvey flooding") ("highway" OR "freeway" OR "interstate" OR "exit ramp" OR "overpass" OR "underpass" OR "intersection" OR "cross street" OR "intersection of" OR "near the intersection" OR "at the corner of" OR "off of" OR "along" OR "road is flooded" OR "street is flooded" OR "highway is closed") '
+)
+
+KEYWORD = LOCATION_ROADS_QUERY
+QUERY_FILTERS = "lang:en -filter:verified -filter:images -is:retweet"  # Skip replies, keep originals + quotes
+
+
 
 # -filter:images to remove images
 
 # Time range (UTC)
-START_DATE = datetime(2017, 8,10 , tzinfo=timezone.utc)
-END_DATE   = datetime(2017, 9, 23, tzinfo=timezone.utc)
+START_DATE = datetime(2017, 8,23 , tzinfo=timezone.utc)
+END_DATE   = datetime(2017, 9, 24, tzinfo=timezone.utc)
 
 WORKERS = 15
 
-OUTPUT_FILE   = "tweets.jsonl"
-RAW_FILE      = "tweets_raw.jsonl"
-PROGRESS_FILE = "progress.json"
+OUTPUT_FILE   = "../../data/twitter_data/tweets.jsonl"
+RAW_FILE      = "../../data/twitter_data/tweets_raw.jsonl"
+PROGRESS_FILE = "../../data/twitter_data/twitter_progress.json"
 
 # Thread-safety
 write_lock = threading.Lock()
