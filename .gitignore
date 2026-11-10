@@ -222,3 +222,4 @@ __marimo__/
 /disaster_social_media_collector/.json
 /disaster_social_media_collector/tweets.jsonl
 /disaster_social_media_collector/tweets_raw.jsonl
+/disaster_social_media_collector/.env
