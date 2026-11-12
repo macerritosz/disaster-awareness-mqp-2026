@@ -23,7 +23,7 @@ load_dotenv("disaster_social_media_collector/.env")
 # Official Tumblr API v2 endpoint for tagged searches
 API_URL = "https://api.tumblr.com/v2/tagged"
 # Tumblr uses your OAuth Consumer Key / API Key
-API_KEY = os.environ.get("ePzClzGIF7zfWq3A2oua3m92FqjZQs4mDq16jWFEGq8tlqsQf0")
+API_KEY = os.environ.get("API_KEY")
 
 # Tumblr /tagged searches single tags (e.g., 'harvey', 'hurricane harvey', 'houston flood')
 TAG = "hurricane harvey"
